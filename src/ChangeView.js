@@ -4,56 +4,36 @@
 
 import React, {Component} from 'react';
 import ChangeExport from './ChangeExport';
+import ListItems from './ListItems'
+import ChangeModel from './ChangeModel'
 
 
 class ChangeView extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {}
+        this.state = {};
     }
+
     componentWillMount() {
         const changeId = this.props.params.changeId;
 
-        fetch(`http://localhost:8090/api/changes/${changeId}`)
-            .then((response)=>{
-                return response.json()
-            })
-            .then((changes) => {
-                this.setState({
-                    change: changes.result
-                })
-            })
+        ChangeModel.findOne(changeId)
+            .then((change) => this.setState({
+                change: change
+            }))
     }
+
     render() {
         const {change} = this.state;
+
+        if(!change) return null;
+
         return (
             <div>
-                <h2>Change id:{change && change.id}</h2>
-                <p>Change id {change && change.id}, created at {change && new Date(change.createdAt).toString()}</p>
-                <ChangeExport />
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Image file name</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {change && change.Items && change.Items.map((item) => {
-                        return (
-                            <tr key={item.code}>
-                                <td>{item.code}</td>
-                                <td>{item.name}</td>
-                                <td>{item.image_file}</td>
-                                <td>{item.description}</td>
-                            </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
+                <h2>Change id:{change.id}</h2>
+                <p>Change id {change.id}, created at {new Date(change.createdAt).toString()}</p>
+                <ChangeExport changeId={change.id} />
+                <ListItems items={change.Items} />
             </div>
         )    
     }

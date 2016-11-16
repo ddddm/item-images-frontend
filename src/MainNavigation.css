@@ -1,0 +1,15 @@
+.MainNavigation {
+    display: block;
+    margin: 1rem auto;
+
+}
+.MainNavigation-navElement {
+    display: inline-block;
+    color: #fff;
+    margin: 1rem;
+
+}
+.MainNavigation-navElement:active,
+.MainNavigation-navElement:visited {
+    color: #fff;
+}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'
+import ChangeModel from './ChangeModel'
 
 class ListChangesView extends Component {
     constructor(props) {
@@ -7,15 +8,10 @@ class ListChangesView extends Component {
         this.state = {}
     }
     componentWillMount() {
-        fetch('http://localhost:8090/api/changes')
-            .then((response)=>{
-                return response.json()
-            })
-            .then((changes) => {
-                this.setState({
-                    changes: changes.result
-                })
-            })
+        ChangeModel.find()
+            .then((changes) => this.setState({
+                changes
+            }))
     }
 
     render() {
@@ -23,7 +19,7 @@ class ListChangesView extends Component {
 
         return (
             <div>
-                <h2>{changes && changes.length} changes</h2>
+                <h2>{changes && changes.length? changes.length : 'No'} changes</h2>
                 <table>
                     <thead>
                     <tr>
@@ -39,8 +35,8 @@ class ListChangesView extends Component {
                         return (
                             <tr key={change.id}>
                                 <td><Link to={`/changes/${change.id}`}>{change.id}</Link></td>
-                                <td>{createdAt}</td>
-                                <td>{change.itemCount}</td>
+                                <td><Link to={`/changes/${change.id}`}>{createdAt}</Link></td>
+                                <td><Link to={`/changes/${change.id}`}>{change.itemCount}</Link></td>
                             </tr>
                         )
                     })}
