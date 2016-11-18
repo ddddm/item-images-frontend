@@ -3,13 +3,11 @@
  */
 
 import axios from 'axios';
-
-const API_URI = 'http://localhost:8090/api/';
-const ASSETS_URI = 'http://localhost:8090/';
+import config from './config'
 
 let Axios = axios.create({
-    baseURL: API_URI,
-    timeout: 60000,
+    baseURL: config.API_ENDPOINT_URI,
+    timeout: 120000,
     responseType: 'json'
 })
 
@@ -81,7 +79,7 @@ function exportAsset(changeId, assetType) {
 
 function getAssetUri(relativePath) {
 
-    return [ASSETS_URI, relativePath].join('')
+    return [config.ASSETS_URI, relativePath].join('')
 }
 
 export default {
