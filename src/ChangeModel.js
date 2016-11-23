@@ -79,7 +79,7 @@ function exportAsset(changeId, assetType) {
 
 function getAssetUri(relativePath) {
 
-    return [config.ASSETS_URI, relativePath].join('')
+    return relativePath? [config.ASSETS_URI, relativePath].join('/') : '';
 }
 
 export default {
