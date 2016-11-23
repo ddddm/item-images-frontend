@@ -1,0 +1,10 @@
+.ViButton {
+    display: inline-block;
+    cursor: pointer;
+    font: 1.3rem Helvetica, Arial, serif;
+    margin: 0.5rem;
+    outline: none;
+}
+.ViButton:active {
+    outline: none;
+}
