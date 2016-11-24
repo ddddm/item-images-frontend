@@ -4,6 +4,7 @@ import './App.css';
 import ListChangesView from './ListChangesView';
 import ChangeView from './ChangeView';
 import CreateChangeView from './CreateChangeView';
+import CreateTaskView from './CreateTaskView';
 import MainNavigation from './MainNavigation';
 
 
@@ -29,6 +30,7 @@ class App extends Component {
                 </div>
 
                 <Match exactly pattern="/changes" component={ListChangesView} />
+                <Match exactly pattern="/create-task" component={CreateTaskView} />
                 <Match exactly pattern="/create-change" component={CreateChangeView} />
                 <Match exactly pattern="/changes/:changeId" component={ChangeView} />
                 <Miss component={NoMatch} />
