@@ -69,7 +69,7 @@ function exportAsset(changeId, assetType) {
     return Axios.get(`changes/${changeId}/${assetType}`)
         .then((res) => {
             if(res.data.status === 'ok') {
-                return res.data.file_path
+                return getAssetUri(res.data.file_path)
             }
 
             throw new Error('failed to export change asset')
