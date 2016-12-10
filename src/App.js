@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Match, Miss, Redirect} from 'react-router'
 import './App.css';
-import ListChangesView from './ListChangesView';
-import ChangeView from './ChangeView';
-import CreateChangeView from './CreateChangeView';
+import ListChangesView from './view/ListChangesView';
+import ChangeView from './view/ChangeView';
+import CreateChangeView from './view/CreateChangeView';
+import CreateTaskView from './view/CreateTaskView';
 import MainNavigation from './MainNavigation';
 
 
@@ -29,6 +30,7 @@ class App extends Component {
                 </div>
 
                 <Match exactly pattern="/changes" component={ListChangesView} />
+                <Match exactly pattern="/create-task" component={CreateTaskView} />
                 <Match exactly pattern="/create-change" component={CreateChangeView} />
                 <Match exactly pattern="/changes/:changeId" component={ChangeView} />
                 <Miss component={NoMatch} />

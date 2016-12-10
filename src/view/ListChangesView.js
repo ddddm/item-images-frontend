@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'
-import ChangeModel from './ChangeModel'
+import ChangeModel from '../ChangeModel'
 
 class ListChangesView extends Component {
     constructor(props) {
