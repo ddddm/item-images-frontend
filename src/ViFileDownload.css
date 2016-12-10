@@ -1,0 +1,17 @@
+.ViFileDownload {
+
+}
+
+
+.ViFileDownload-assetDownloadButtonWr {
+    display: inline-block;
+}
+
+.ViFileDownload-assetDownloadButton {
+    display: inline-block;
+    color: black;
+}
+
+.ViFileDownload-assetDownloadButton:hover {
+    color: #cccccc;
+}

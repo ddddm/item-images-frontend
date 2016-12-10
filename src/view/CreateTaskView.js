@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import TaskModel from './TaskModel'
-import ListItems from './ListItems'
+import TaskModel from '../TaskModel'
+import ListItems from '../ListItems'
+import ViFileDownload from './../ViFileDownload'
 
 function UploadFileInput(props) {
 
@@ -18,7 +19,8 @@ export default class CreateTaskView extends Component {
         super(props)
 
         this.state = {
-            files: null
+            files: null,
+            loading: false
         }
 
         this.handleFilesSubmit = this.handleFilesSubmit.bind(this)
@@ -26,22 +28,26 @@ export default class CreateTaskView extends Component {
     }
 
     render() {
-        const { newItems } = this.state;
+        const { newItems, loading } = this.state;
+        const taskFileURI = TaskModel.getFileURI(this.state.taskFileName);
         return (
-            <div>
+            !loading? (<div>
                 <form onSubmit={this.handleFilesSubmit}>
                     <label>Excel files (price lists)</label>
                     <UploadFileInput onChange={this.handleFilesChange} />
                     <button type="submit" >Upload pricelists</button>
                 </form>
 
+                {taskFileURI && <ViFileDownload assetUri={taskFileURI} />}
+
                 {newItems && <ListItems items={newItems} />}
-            </div>
+            </div>) : (
+                <div>Loading...</div>
+            )
         )
     }
 
     handleFilesChange(files) {
-        console.log(files);
         this.setState({
             files
         })
@@ -59,8 +65,9 @@ export default class CreateTaskView extends Component {
         }
 
         TaskModel.create(data)
-            .then(({ items }) => {
+            .then(({ items, file_path }) => {
                 this.setState({
+                    taskFileName: file_path,
                     newItems: items
                 })
             })

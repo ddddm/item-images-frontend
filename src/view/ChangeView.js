@@ -3,9 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import ChangeExport from './ChangeExport';
-import ListItems from './ListItems'
-import ChangeModel from './ChangeModel'
+import ChangeExport from '../ChangeExport';
+import ListItems from '../ListItems'
+import ChangeModel from '../ChangeModel'
 
 
 class ChangeView extends Component {

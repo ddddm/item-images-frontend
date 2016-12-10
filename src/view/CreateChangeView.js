@@ -3,9 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import UploadChange from './UploadChange'
-import ChangeCheckResults from './ChangeCheckResults'
-import ChangeModel from './ChangeModel'
+import UploadChange from '../UploadChange'
+import ChangeCheckResults from '../ChangeCheckResults'
+import ChangeModel from '../ChangeModel'
 
 class CreateChangeView extends Component {
     constructor(props) {

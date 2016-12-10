@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Match, Miss, Redirect} from 'react-router'
 import './App.css';
-import ListChangesView from './ListChangesView';
-import ChangeView from './ChangeView';
-import CreateChangeView from './CreateChangeView';
-import CreateTaskView from './CreateTaskView';
+import ListChangesView from './view/ListChangesView';
+import ChangeView from './view/ChangeView';
+import CreateChangeView from './view/CreateChangeView';
+import CreateTaskView from './view/CreateTaskView';
 import MainNavigation from './MainNavigation';
 
 

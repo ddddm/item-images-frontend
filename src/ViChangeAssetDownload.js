@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
-import ViButton from './ViButton'
 import ChangeModel from './ChangeModel'
+import ViFileDownload from './ViFileDownload'
 
-import './ViChangeAssetDownload.css'
-
-const ViChangeDownloadButton = ({onClick, label, type}) =>{
-    return (
-        <ViButton label={label} onClick={() => {
-            onClick(type)
-        }}/>
-    )
-}
 
 class ViChangeAssetDownload extends Component {
     constructor(props) {
@@ -42,13 +33,7 @@ class ViChangeAssetDownload extends Component {
         const { assetUri } = this.state;
         const { type } = this.props;
         return (
-            <div className="ViChangeAssetDownload">
-                <ViChangeDownloadButton onClick={this.onAssetRequested} type={type} label={`Export ${type}`}/>
-                {assetUri &&  <div className="ViChangeAssetDownload-assetDownloadButtonWr">
-                    <a className="ViChangeAssetDownload-assetDownloadButton" href={assetUri}>Download {type}</a>
-                </div>}
-                {this.state.loading &&  <div className="ViChangeAssetDownload-assetDownloadButtonWr">Loading...</div>}
-            </div>
+            <ViFileDownload onClick={this.onAssetRequested} type={type} assetUri={assetUri} />
         )
     }
 }

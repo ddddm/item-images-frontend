@@ -16,7 +16,7 @@ function create(data) {
             if(res.data.status === 'ok') {
                 return {
                     items: res.data.result,
-                    file_name: res.data.file_name
+                    file_path: res.data.file_path
                 }
             }
 
@@ -25,6 +25,11 @@ function create(data) {
         .catch((err) => console.error(err))
 }
 
+function getFileURI(relativePath) {
+    return relativePath? [config.ASSETS_URI, relativePath].join('/') : ''
+}
+
 export default {
-    create
+    create,
+    getFileURI
 }
