@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Match, Miss, Redirect} from 'react-router'
+import './elemental.css';
 import './App.css';
 import ListChangesView from './view/ListChangesView';
 import ChangeView from './view/ChangeView';
