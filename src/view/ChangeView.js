@@ -3,6 +3,7 @@
  */
 
 import React, {Component} from 'react';
+import {Row, Col} from 'elemental';
 import ChangeExport from '../ChangeExport';
 import ListItems from '../ListItems'
 import ChangeModel from '../ChangeModel'
@@ -29,12 +30,21 @@ class ChangeView extends Component {
         if(!change) return null;
 
         return (
-            <div>
-                <h2>Change id:{change.id}</h2>
-                <p>Change id {change.id}, created at {new Date(change.createdAt).toString()}</p>
-                <ChangeExport changeId={change.id} />
-                <ListItems items={change.Items} />
-            </div>
+            <Row>
+                <Col sm='1'>
+                    <h2>Change</h2>
+                    <p>Change id {change.id}, created at {new Date(change.createdAt).toString()}</p>
+
+                </Col>
+                <Col sm="1">
+
+                    <ChangeExport changeId={change.id} />
+
+                </Col>
+                <Col basis="100%">
+                    <ListItems items={change.Items} />
+                </Col>
+            </Row>
         )    
     }
     
