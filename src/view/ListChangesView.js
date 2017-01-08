@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'
 import ChangeModel from '../ChangeModel'
+import {Table} from 'elemental';
 
 class ListChangesView extends Component {
     constructor(props) {
@@ -20,13 +21,18 @@ class ListChangesView extends Component {
         return (
             <div>
                 <h2>{changes && changes.length? changes.length : 'No'} changes</h2>
-                <table>
+                <Table>
+                    <colgroup>
+                        <col width="5%" />
+                        <col width="40%" />
+                        <col width="55%" />
+                    </colgroup>
                     <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Date</th>
-                        <th>Items in change</th>
-                    </tr>
+                        <tr>
+                            <th>id</th>
+                            <th>Creation date</th>
+                            <th>Items in change</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {changes && changes.map((change) => {
@@ -41,7 +47,7 @@ class ListChangesView extends Component {
                         )
                     })}
                     </tbody>
-                </table>
+                </Table>
             </div>
         )
     }

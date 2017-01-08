@@ -1,8 +1,29 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  /*flex-wrap: wrap;*/
+  /*flex-basis: 1000px;*/
+  align-items: center;
+  justify-content: center;
 }
 
+.App-container {
+  flex: 1;
+  width: 100%;
+  min-width: 320px;
+}
 .App-header {
   background-color: #222;
-  padding: 20px;
-  color: white;
+  color: #ffffff;
+}
+
+.App-nav {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.App-content {
+  max-width: 1000px;
+  padding-top: 30px;
+  margin: 0 auto;
 }

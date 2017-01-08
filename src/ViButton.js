@@ -1,5 +1,6 @@
-import './ViButton.css'
 import React from 'react'
+import {Button} from 'elemental';
+import './ViButton.css'
 
 const ViButton = (
     {
@@ -7,7 +8,7 @@ const ViButton = (
         onClick = function(){}
     }
     ) => (
-    <button onClick={(e) => onClick(e)} className='ViButton'>{label}</button>
+    <Button className='ViButton' onClick={(e) => onClick(e)} type='primary'>{label}</Button>
 )
 
 export default ViButton;

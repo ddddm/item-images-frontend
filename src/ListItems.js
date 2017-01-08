@@ -2,9 +2,16 @@
  * Created by dima on 16.11.16.
  */
 import React from 'react';
+import {Table} from 'elemental'
 
 const ListItems = (props) => (
-    <table>
+    <Table>
+        <colgroup>
+            <col width="5%" />
+            <col width="40%" />
+            <col width="15%" />
+            <col width="40%" />
+        </colgroup>
         <thead>
         <tr>
             <th>Code</th>
@@ -25,7 +32,7 @@ const ListItems = (props) => (
             )
         })}
         </tbody>
-    </table>
+    </Table>
 )
 
 export default ListItems;

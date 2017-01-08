@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import TaskModel from '../TaskModel'
 import ListItems from '../ListItems'
 import ViFileDownload from './../ViFileDownload'
+import ViButton from './../ViButton';
+import {Form, FormField, Spinner, FileDragAndDrop} from 'elemental';
 
 function UploadFileInput(props) {
 
@@ -32,17 +34,20 @@ export default class CreateTaskView extends Component {
         const taskFileURI = TaskModel.getFileURI(this.state.taskFileName);
         return (
             !loading? (<div>
-                <form onSubmit={this.handleFilesSubmit}>
-                    <label>Excel files (price lists)</label>
-                    <UploadFileInput onChange={this.handleFilesChange} />
-                    <button type="submit" >Upload pricelists</button>
-                </form>
+                <Form>
+                    <FormField label="Excel files (price lists)">
+                        <FileDragAndDrop onDrop={(files) => {this.handleFilesChange(files)}} />
+                    </FormField>
+                    <FormField>
+                        <ViButton onClick={this.handleFilesSubmit} label="Upload pricelists"/>
+                    </FormField>
 
+                </Form>
                 {taskFileURI && <ViFileDownload assetUri={taskFileURI} />}
 
                 {newItems && <ListItems items={newItems} />}
             </div>) : (
-                <div>Loading...</div>
+                <Spinner size="lg" />
             )
         )
     }
@@ -59,6 +64,8 @@ export default class CreateTaskView extends Component {
 
         e.preventDefault();
 
+        this.setState({loading: true})
+
         for (var i = 0; i < files.length; i++) {
             let file = files[i];
             data.append('excel', file);
@@ -68,7 +75,8 @@ export default class CreateTaskView extends Component {
             .then(({ items, file_path }) => {
                 this.setState({
                     taskFileName: file_path,
-                    newItems: items
+                    newItems: items,
+                    loading: false
                 })
             })
     }
