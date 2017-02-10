@@ -3,14 +3,17 @@
  */
 
 import React from 'react';
+import { Table } from 'elemental';
 
 const ChangeCheckResults = (props) => {
     const { checkResults } = props;
 
     return (
         <div>
-            <h3>Change check results</h3>
-            <ul>{
+          <h3>Results for this change</h3> 
+          <Table>
+            <tbody>
+            {
                 Object.keys(
                     checkResults.stats
                 )
@@ -18,10 +21,17 @@ const ChangeCheckResults = (props) => {
                         const resultLabel = stat;
                         const resultValue = checkResults.stats[stat];
 
-                        return <li key={resultLabel}>{[resultLabel, resultValue].join(': ')}</li>
+                        return (
+                          <tr key={resultLabel}>
+                            <td><label>{resultLabel}</label></td>
+                            <td>{resultValue}</td>
+                          </tr>
+                        )
                     } )
 
-            }</ul>
+            }
+            </tbody>
+          </Table>
         </div>
     )
 }

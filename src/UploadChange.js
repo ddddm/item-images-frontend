@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {Form, FormField, FileUpload, FileDragAndDrop} from 'elemental';
+import {Form, FormField, FileUpload } from 'elemental';
 import ViButton from './ViButton';
 
 function UploadChangeFileInput(props) {
@@ -62,12 +62,12 @@ class UploadChange extends Component {
 
     render() {
         return (
-            <Form>
-                <FormField label="Excel">
+            <Form type={'horizontal'} component='form'>
+                <FormField label="Excel file">
                     <UploadChangeFileInput onChange={this.handleChange} type="excel"/>
                 </FormField>
 
-                <FormField label="Zip">
+                <FormField label="Images file (zip)">
                     <UploadChangeFileInput onChange={this.handleChange} type="zip"/>
                 </FormField>
 
