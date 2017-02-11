@@ -6,7 +6,8 @@ import React, {Component} from 'react';
 import UploadChange from '../UploadChange'
 import ChangeCheckResults from '../ChangeCheckResults'
 import ChangeModel from '../ChangeModel'
-import { Row, Col } from 'elemental';
+import { Row, Col, ButtonGroup, Button } from 'elemental';
+import './CreateChangeView.css';
 
 class CreateChangeView extends Component {
     constructor(props) {
@@ -14,11 +15,26 @@ class CreateChangeView extends Component {
 
         this.state = {
             testResultFileUri: null,
-            testSucceeded: false
+            testSucceeded: false,
+            modes: [{
+              type: 'create',
+              name: 'Create change'
+            }, {
+              type: 'test',
+              name: 'Test change'
+            }],
+            currentMode: 'test'
         };
 
         this.checkChange = this.checkChange.bind(this);
         this.createChange = this.createChange.bind(this);
+        this.switchMode = this.switchMode.bind(this);
+    }
+
+    switchMode(mode) {
+      this.setState({
+        currentMode: mode.type
+      })
     }
 
     checkChange(data) {
@@ -40,30 +56,43 @@ class CreateChangeView extends Component {
     }
 
     render() {
-        const { checkResults, createResults } = this.state;
+        const { checkResults, createResults, modes, currentMode } = this.state;
+        const isModeActive = mode => mode.type === currentMode;
 
         return (
-            <div>
-                <h2>Test change</h2>
-                <Row>
-                  <Col sx='100%' sm='50%'>
+            <div className='CreateChangeView'>
+                <h2>New change</h2>
+                <Row className='CreateChangeView__modeSelector'>
+                  <Col sm='100%'>
+                    <ButtonGroup>
+                      {modes.map( (mode, i) => {
+                        return (<Button onClick={e => {
+                          this.switchMode(mode)
+                        }}  key={i} isActive={isModeActive(mode)} type="default">{mode.name}</Button>)
+                      })}
+                    </ButtonGroup>
+                  </Col>
+                </Row>
+
+
+                { currentMode === 'test'? <Row>
+                  <Col xs='100%' sm='50%'>
 
                     <UploadChange label='Upload and test' onSubmit={this.checkChange}/>
                   </Col>
-                  <Col sx='100%' sm='50%'>
+                  <Col xs='100%' sm='50%'>
                     {checkResults &&  <ChangeCheckResults checkResults={checkResults} />}
                   </Col>
-                </Row>
+                </Row> : null }
 
-                <h2>Create new change</h2>
-                <Row>
-                  <Col sx='100%' sm='50%'>
+                { currentMode === 'create'? <Row>
+                  <Col xs='100%' sm='50%'>
                     <UploadChange label='Upload and create' onSubmit={this.createChange}/>
                   </Col>
-                  <Col sx='100%' sm='50%'>
+                  <Col xs='100%' sm='50%'>
                     {createResults &&  <ChangeCheckResults checkResults={createResults} />}
                   </Col>
-                </Row>
+                </Row> : null }
             </div>
         )
     }
