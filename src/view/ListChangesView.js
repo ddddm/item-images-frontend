@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router'
 import ChangeModel from '../ChangeModel'
-import {Table} from 'elemental';
+import { Table, Spinner } from 'elemental';
+import FullWidthSpinner from '../FullWidthSpinner.js';
 
 class ListChangesView extends Component {
     constructor(props) {
@@ -17,10 +18,29 @@ class ListChangesView extends Component {
 
     render() {
         const {changes} = this.state;
+        const listLength = changes => changes && changes.length? changes.length : <Spinner type="primary" />
+        const isLoaded = !changes || changes.length === 0;
+        const renderChangesList = (changes) => {
+          if (!changes) {
+            return null;
+          }
+
+          return changes.map((change) => {
+              const createdAt = new Date(change.createdAt).toString();
+
+              return (
+                  <tr key={change.id}>
+                      <td><Link to={`/changes/${change.id}`}>{change.id}</Link></td>
+                      <td><Link to={`/changes/${change.id}`}>{createdAt}</Link></td>
+                      <td><Link to={`/changes/${change.id}`}>{change.itemCount}</Link></td>
+                  </tr>
+              )
+          })
+        }
 
         return (
             <div>
-                <h2>{changes && changes.length? changes.length : 'No'} changes</h2>
+                <h2>{listLength(changes)} changes</h2>
                 <Table>
                     <colgroup>
                         <col width="5%" />
@@ -35,17 +55,16 @@ class ListChangesView extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {changes && changes.map((change) => {
-                        const createdAt = new Date(change.createdAt).toString();
 
-                        return (
-                            <tr key={change.id}>
-                                <td><Link to={`/changes/${change.id}`}>{change.id}</Link></td>
-                                <td><Link to={`/changes/${change.id}`}>{createdAt}</Link></td>
-                                <td><Link to={`/changes/${change.id}`}>{change.itemCount}</Link></td>
-                            </tr>
-                        )
-                    })}
+                    { isLoaded?
+                      (
+                          <tr>
+                            <td colSpan='3'><FullWidthSpinner /></td>
+                          </tr>
+                      )
+                      :
+                      renderChangesList(changes)
+                    }
                     </tbody>
                 </Table>
             </div>

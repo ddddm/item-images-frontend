@@ -1,0 +1,6 @@
+.FullWidthSpinner {
+  width: 100%;
+  display: flex;
+  margin: 25px auto;
+  justify-content: center;
+}
