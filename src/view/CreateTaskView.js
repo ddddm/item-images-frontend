@@ -3,7 +3,8 @@ import TaskModel from '../TaskModel'
 import ListItems from '../ListItems'
 import ViFileDownload from './../ViFileDownload'
 import ViButton from './../ViButton';
-import {Form, FormField, Spinner, FileDragAndDrop} from 'elemental';
+import {Form, FormField, FileDragAndDrop} from 'elemental';
+import FullWidthSpinner from '../FullWidthSpinner.js';
 
 function UploadFileInput(props) {
 
@@ -33,22 +34,26 @@ export default class CreateTaskView extends Component {
         const { newItems, loading } = this.state;
         const taskFileURI = TaskModel.getFileURI(this.state.taskFileName);
         return (
-            !loading? (<div>
+            !loading?
+             (
+              <div>
                 <Form>
-                    <FormField label="Excel files (price lists)">
-                        <FileDragAndDrop onDrop={(files) => {this.handleFilesChange(files)}} />
-                    </FormField>
-                    <FormField>
-                        <ViButton onClick={this.handleFilesSubmit} label="Upload pricelists"/>
-                    </FormField>
-
+                  <FormField label="Excel files (price lists)">
+                    <FileDragAndDrop onDrop={(files) => {this.handleFilesChange(files)}} />
+                  </FormField>
+                  <FormField>
+                    <ViButton onClick={this.handleFilesSubmit} label="Upload pricelists"/>
+                  </FormField>
                 </Form>
-                {taskFileURI && <ViFileDownload assetUri={taskFileURI} />}
+                  {taskFileURI && <ViFileDownload assetUri={taskFileURI} />}
 
-                {newItems && <ListItems items={newItems} />}
-            </div>) : (
-                <Spinner size="lg" />
-            )
+                  {newItems && <ListItems items={newItems} />}
+              </div>
+              )
+              :
+              (
+                <FullWidthSpinner />
+              )
         )
     }
 

@@ -24,6 +24,6 @@
 
 .App-content {
   max-width: 1000px;
-  padding-top: 30px;
+  padding: 30px 25px 0;
   margin: 0 auto;
 }
