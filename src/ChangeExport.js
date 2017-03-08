@@ -22,9 +22,14 @@ class ChangeExport extends Component {
                     changeId={this.props.changeId}
                 />
                 <ViChangeAssetDownload
+                    type="zip?type=web"
+                    changeId={this.props.changeId}
+                />
+                <ViChangeAssetDownload
                     type="excel"
                     changeId={this.props.changeId}
                 />
+
 
             </div>
         )
