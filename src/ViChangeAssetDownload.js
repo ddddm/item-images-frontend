@@ -30,10 +30,10 @@ class ViChangeAssetDownload extends Component {
     }
 
     render() {
-        const { assetUri } = this.state;
+        const { assetUri, loading } = this.state;
         const { type } = this.props;
         return (
-            <ViFileDownload onClick={this.onAssetRequested} type={type} assetUri={assetUri} />
+            <ViFileDownload onClick={this.onAssetRequested} type={type} assetUri={assetUri} loading={loading} />
         )
     }
 }
