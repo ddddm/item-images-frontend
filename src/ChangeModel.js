@@ -7,7 +7,7 @@ import config from './config'
 
 let Axios = axios.create({
     baseURL: config.API_ENDPOINT_URI,
-    timeout: 120000,
+    timeout: 1200000,
     responseType: 'json'
 })
 
